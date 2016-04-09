@@ -180,5 +180,3 @@ void MatrixQuickSort(int FirstElement, int LastElement, string sMatrix[][Maximum
 	if (FirstSubarrayElement<LastElement)//sorting of right part of matrix
 		MatrixQuickSort(FirstSubarrayElement,LastElement,sMatrix,RowNumber);
 }
-
-
