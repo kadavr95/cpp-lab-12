@@ -1,21 +1,18 @@
 #include <conio.h>//including input/output libraries
 #include <iostream.h>
-#include <string>
+#include <string>//string type part
 
-using namespace std;
+using namespace std;//using namespace for easy usage of string library
+
+const MaximumRowNumber=100, MaximumColumnNumber=50;//defining maximum values of rows and column in matrix
 
 void OutputMenu();//functions prototypes
-
-
-
-const MaximumRowNumber=100, MaximumColumnNumber=50;
-
 void MatrixInput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber);
 void MatrixInput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber);
 void MatrixOutput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber);
 void MatrixOutput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber);
-void MatrixQuickSort(int first, int last, int iMatrix[][MaximumRowNumber], int RowNumber);
-void MatrixQuickSort(int first, int last, string sMatrix[][MaximumRowNumber], int RowNumber);
+void MatrixQuickSort(int FirstElement, int LastElement, int iMatrix[][MaximumRowNumber], int RowNumber);
+void MatrixQuickSort(int FirstElement, int LastElement, string sMatrix[][MaximumRowNumber], int RowNumber);
 
 
 
@@ -34,22 +31,22 @@ void main()//main function
 		switch (OperationCode)//command choice
 		{
 			case 49:
-				cout<<"Enter number of columns in matrix: ";
+				cout<<"Enter number of columns in matrix: ";//request to enter quantity of columns in rows in matrix
 				cin>>ColumnNumber;
 				cout<<"Enter number of rows in matrix: ";
 				cin>>RowNumber;
-				MatrixInput(iMatrix, ColumnNumber,RowNumber);
-				MatrixQuickSort(0, ColumnNumber-1, iMatrix, RowNumber);//сортировка массива
-				MatrixOutput(iMatrix, ColumnNumber,RowNumber);
+				MatrixInput(iMatrix, ColumnNumber,RowNumber);//matrix data input
+				MatrixQuickSort(0, ColumnNumber-1, iMatrix, RowNumber);//matrix sort
+				MatrixOutput(iMatrix, ColumnNumber,RowNumber);//matrix data output
 				break;
 			case 50:
-				cout<<"Enter number of columns in matrix: ";
+				cout<<"Enter number of columns in matrix: ";//request to enter quantity of columns in rows in matrix
 				cin>>ColumnNumber;
 				cout<<"Enter number of rows in matrix: ";
 				cin>>RowNumber;
-				MatrixInput(sMatrix, ColumnNumber,RowNumber);
-				MatrixQuickSort(0, ColumnNumber-1, sMatrix, RowNumber);//сортировка массива
-				MatrixOutput(sMatrix, ColumnNumber,RowNumber);
+				MatrixInput(sMatrix, ColumnNumber,RowNumber);//matrix data input
+				MatrixQuickSort(0, ColumnNumber-1, sMatrix, RowNumber);//matrix sort
+				MatrixOutput(sMatrix, ColumnNumber,RowNumber); //matrix data output
 				break;
 			default://case of pressing button not assigned to commands
 				OutputMenu();//show menu of available commands
@@ -64,119 +61,124 @@ void OutputMenu()//show menu of available commands
 	cout<<"Press 2 to enter string type matrix\n";
 }
 
-void MatrixInput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)
+void MatrixInput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//integer matrix data input
 {
 int ColumnCounter,RowCounter;
-   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++) {
-	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++) {
+   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
+   {
+	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
+	  {
 		  cin>>iMatrix[ColumnCounter][RowCounter];
 	  }
    }
 }
 
-void MatrixInput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)
+void MatrixInput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//string matrix data input
 {
 int ColumnCounter,RowCounter;
-   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++) {
-	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++) {
+   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
+   {
+	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
+	  {
 		  cin>>sMatrix[ColumnCounter][RowCounter];
 	  }
    }
 }
 
-void MatrixOutput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)
+void MatrixOutput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//integer matrix data output
 {
 int ColumnCounter,RowCounter;
-   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++) {
-	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++) {
+   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
+   {
+	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
+	  {
 		  cout<<iMatrix[ColumnCounter][RowCounter]<<" ";
 	  }
 	  cout<<"\n";
    }
 }
 
-void MatrixOutput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)
+void MatrixOutput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//string matrix data output
 {
 int ColumnCounter,RowCounter;
-   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++) {
-	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++) {
+   for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
+   {
+	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
+	  {
 		  cout<<sMatrix[ColumnCounter][RowCounter]<<" ";
 	  }
 	  cout<<"\n";
    }
 }
 
-
-void MatrixQuickSort(int first, int last, string sMatrix[][MaximumRowNumber], int RowNumber)
+void MatrixQuickSort(int FirstElement, int LastElement, int iMatrix[][MaximumRowNumber], int RowNumber)//integer matrix sort
 {
-	string pivot, temp; //объ€вление переменных
-	int l,r,i;
-	l=first;//передача внешних переменных во внутренние счЄтчики
-	r=last;
-	pivot=sMatrix[(l+r)/2][0]; //определение опорного значени€
-	while (l<=r)//поиск пересечени€ счЄтчиков
+	int Pivot; //defining variables
+	int FirstSubarrayElement,LastSubarrayElement,Counter,TemporaryVariable;
+	FirstSubarrayElement=FirstElement;//assign data from external variables to internal counters
+	LastSubarrayElement=LastElement;
+	Pivot=iMatrix[(FirstSubarrayElement+LastSubarrayElement)/2][0];//defining pivot element
+	while (FirstSubarrayElement<=LastSubarrayElement)//checking counters intersection
 	{
-		while (sMatrix[l][0]<pivot)//пока элемент меньше опорного
+		while (iMatrix[FirstSubarrayElement][0]<Pivot)//while element is smaller than pivot
 		{
-			l++;//увеличение левого счетчика
+			FirstSubarrayElement++;//left counter increment
 		}
-		while (sMatrix[r][0]>pivot)//пока элемент больше опорного
+		while (iMatrix[LastSubarrayElement][0]>Pivot)//while element is bigger than pivot
 		{
-			r--;//уменьшение правого счетчика
+			LastSubarrayElement--;//right counter decrement
 		}
-		if (l<=r)//если левый счЄтчик меньше правого
+		if (FirstSubarrayElement<=LastSubarrayElement)//in case of left counter is less than right counter
 		{
- //перестановка двух элементов
-			for (i = 0; i < RowNumber; i++)
+			for (Counter = 0; Counter < RowNumber; Counter++)//replacement of all elements in column through temporary variable
 			{
-				temp=sMatrix[l][i];
-				sMatrix[l][i]=sMatrix[r][i];
-				sMatrix[r][i]=temp;
+				TemporaryVariable=iMatrix[FirstSubarrayElement][Counter];
+				iMatrix[FirstSubarrayElement][Counter]=iMatrix[LastSubarrayElement][Counter];
+				iMatrix[LastSubarrayElement][Counter]=TemporaryVariable;
 			}
-			l++;//увеличение левого счетчика
-			r--;//уменьшение правого счетчика
+			FirstSubarrayElement++;//left counter increment
+			LastSubarrayElement--;//right counter decrement
 		}
 	}
-	if (first<r)//сортировка левой части
-		MatrixQuickSort(first,r,sMatrix,qty, ColumnNumber, RowNumber);
-	if (l<last)//сортировка правой части
-		MatrixQuickSort(l,last,sMatrix,qty, ColumnNumber, RowNumber);
+	if (FirstElement<LastSubarrayElement)//sorting of left part of matrix
+		MatrixQuickSort(FirstElement,LastSubarrayElement,iMatrix, RowNumber);
+	if (FirstSubarrayElement<LastElement)//sorting of right part of matrix
+		MatrixQuickSort(FirstSubarrayElement,LastElement,iMatrix, RowNumber);
+}
+
+void MatrixQuickSort(int FirstElement, int LastElement, string sMatrix[][MaximumRowNumber], int RowNumber)//string matrix sort
+{
+	string Pivot, TemporaryVariable; //defining variables
+	int FirstSubarrayElement,LastSubarrayElement,Counter;
+	FirstSubarrayElement=FirstElement;//assign data from external variables to internal counters
+	LastSubarrayElement=LastElement;
+	Pivot=sMatrix[(FirstSubarrayElement+LastSubarrayElement)/2][0];//defining pivot element
+	while (FirstSubarrayElement<=LastSubarrayElement)//checking counters intersection
+	{
+		while (sMatrix[FirstSubarrayElement][0]<Pivot)//while element is smaller than pivot
+		{
+			FirstSubarrayElement++;//left counter increment
+		}
+		while (sMatrix[LastSubarrayElement][0]>Pivot)//while element is bigger than pivot
+		{
+			LastSubarrayElement--;//right counter decrement
+		}
+		if (FirstSubarrayElement<=LastSubarrayElement)//in case of left counter is less than right counter
+		{
+			for (Counter = 0; Counter < RowNumber; Counter++)//replacement of all elements in column through temporary variable
+			{
+				TemporaryVariable=sMatrix[FirstSubarrayElement][Counter];
+				sMatrix[FirstSubarrayElement][Counter]=sMatrix[LastSubarrayElement][Counter];
+				sMatrix[LastSubarrayElement][Counter]=TemporaryVariable;
+			}
+			FirstSubarrayElement++;//left counter increment
+			LastSubarrayElement--;//right counter decrement
+		}
+	}
+	if (FirstElement<LastSubarrayElement)//sorting of left part of matrix
+		MatrixQuickSort(FirstElement,LastSubarrayElement,sMatrix, RowNumber);
+	if (FirstSubarrayElement<LastElement)//sorting of right part of matrix
+		MatrixQuickSort(FirstSubarrayElement,LastElement,sMatrix,RowNumber);
 }
 
 
-
-void MatrixQuickSort(int first, int last, int iMatrix[][MaximumRowNumber],int qty, int RowNumber)
-{
-	int pivot; //объ€вление переменных
-	int l,r,i,temp;
-	l=first;//передача внешних переменных во внутренние счЄтчики
-	r=last;
-	pivot=iMatrix[(l+r)/2][0]; //определение опорного значени€
-	while (l<=r)//поиск пересечени€ счЄтчиков
-	{
-		while (iMatrix[l][0]<pivot)//пока элемент меньше опорного
-		{
-			l++;//увеличение левого счетчика
-		}
-		while (iMatrix[r][0]>pivot)//пока элемент больше опорного
-		{
-			r--;//уменьшение правого счетчика
-		}
-		if (l<=r)//если левый счЄтчик меньше правого
-		{
- //перестановка двух элементов
-			for (i = 0; i < RowNumber; i++)
-			{
-				temp=iMatrix[l][i];
-				iMatrix[l][i]=iMatrix[r][i];
-				iMatrix[r][i]=temp;
-			}
-			l++;//увеличение левого счетчика
-			r--;//уменьшение правого счетчика
-		}
-	}
-	if (first<r)//сортировка левой части
-		MatrixQuickSort(first,r,iMatrix,qty, ColumnNumber, RowNumber);
-	if (l<last)//сортировка правой части
-		MatrixQuickSort(l,last,iMatrix,qty, ColumnNumber, RowNumber);
-}
