@@ -2,8 +2,6 @@
 #include <iostream.h>
 #include <string>//string type part
 
-using namespace std;//using namespace for easy usage of string library
-
 const MaximumRowNumber=100, MaximumColumnNumber=50;//defining maximum values of rows and column in matrix
 
 void OutputMenu();//functions prototypes
@@ -13,9 +11,6 @@ void MatrixOutput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumb
 void MatrixOutput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber);
 void MatrixQuickSort(int FirstElement, int LastElement, int iMatrix[][MaximumRowNumber], int RowNumber);
 void MatrixQuickSort(int FirstElement, int LastElement, string sMatrix[][MaximumRowNumber], int RowNumber);
-
-
-
 
 void main()//main function
 {
