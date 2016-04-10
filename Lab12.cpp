@@ -88,6 +88,7 @@ int ColumnCounter,RowCounter;
 void MatrixOutput(int iMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//integer matrix data output
 {
 int ColumnCounter,RowCounter;
+   cout<<"\n";
    for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
    {
 	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
@@ -101,6 +102,7 @@ int ColumnCounter,RowCounter;
 void MatrixOutput(string sMatrix[][MaximumRowNumber], int ColumnNumber, int RowNumber)//string matrix data output
 {
 int ColumnCounter,RowCounter;
+   cout<<"\n";
    for (RowCounter = 0; RowCounter < RowNumber; RowCounter++)
    {
 	  for (ColumnCounter = 0; ColumnCounter < ColumnNumber; ColumnCounter++)
