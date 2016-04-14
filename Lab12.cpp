@@ -117,11 +117,11 @@ void MatrixQuickSort(int FirstElement, int LastElement, int iMatrix[][MaximumRow
 	Pivot=iMatrix[(FirstSubarrayElement+LastSubarrayElement)/2][0];//defining pivot element
 	while (FirstSubarrayElement<=LastSubarrayElement)//checking counters intersection
 	{
-		while (iMatrix[FirstSubarrayElement][0]<Pivot)//while element is smaller than pivot
+		while (iMatrix[FirstSubarrayElement][0]>Pivot)//while element is smaller than pivot
 		{
 			FirstSubarrayElement++;//left counter increment
 		}
-		while (iMatrix[LastSubarrayElement][0]>Pivot)//while element is bigger than pivot
+		while (iMatrix[LastSubarrayElement][0]<Pivot)//while element is bigger than pivot
 		{
 			LastSubarrayElement--;//right counter decrement
 		}
@@ -152,11 +152,11 @@ void MatrixQuickSort(int FirstElement, int LastElement, string sMatrix[][Maximum
 	Pivot=sMatrix[(FirstSubarrayElement+LastSubarrayElement)/2][0];//defining pivot element
 	while (FirstSubarrayElement<=LastSubarrayElement)//checking counters intersection
 	{
-		while (sMatrix[FirstSubarrayElement][0]<Pivot)//while element is smaller than pivot
+		while (sMatrix[FirstSubarrayElement][0]>Pivot)//while element is smaller than pivot
 		{
 			FirstSubarrayElement++;//left counter increment
 		}
-		while (sMatrix[LastSubarrayElement][0]>Pivot)//while element is bigger than pivot
+		while (sMatrix[LastSubarrayElement][0]<Pivot)//while element is bigger than pivot
 		{
 			LastSubarrayElement--;//right counter decrement
 		}
